@@ -90,7 +90,7 @@ class Bot(BaseBot):
             }
 
             self.set_store(data)
-            self.view(data['batch'])
+            self.view([args[0], args[-1]])
             # self.send_message('Done!')
             self.backup_store('silent')
         else:
