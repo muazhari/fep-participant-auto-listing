@@ -80,7 +80,41 @@ class Bot(BaseBot):
             if event['event_type'] != 'message':
                 self.send_message('Join event!')
 
+<<<<<<< HEAD
         self.command_handler(event)
+
+    def admin(self, args):
+        data = {
+            'event': args[-1]
+        }
+        event = data['event']
+        if self.whitelist_check(event):
+            self.send_message('privilage: {}'.format(event))
+
+    def blacklist_check(self, event):
+        sender = event['sender']
+
+        blocked_ids = ['C7b132b65f0db5c28c4b7563bd348d168',
+                       'C2a14eb4c73958925b6a299fe6798b67b']
+        blocked_types = []
+
+        validate = sender['id'] in blocked_ids or sender['name'] in blocked_types
+
+        return validate
+
+    def whitelist_check(self, event):
+        sender = event['sender']
+
+        allowed_ids = ['U016bfe22df53b903b404a80efdd8ec65', 'localuser']
+
+        allowed_types = []
+
+        validate_sender = sender['id'] in allowed_ids or sender['name'] in allowed_types
+
+        return validate_sender
+=======
+        self.command(event)
+>>>>>>> 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
 
     def admin(self, args):
         data = {
@@ -283,7 +317,11 @@ class Bot(BaseBot):
         '''
         self.send_message(msg)
 
+<<<<<<< HEAD
     def command_handler(self, event):
+=======
+    def command(self, event):
+>>>>>>> 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
         command_list = {'add': self.add,
                         'upd': self.update,
                         'del': self.delete,
