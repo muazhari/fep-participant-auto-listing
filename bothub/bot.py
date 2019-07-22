@@ -80,6 +80,10 @@ class Bot(BaseBot):
             if event['event_type'] != 'message':
                 self.send_message('Join event!')
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 86fc1f914dcdd2b59d338526988b3dcc264f91c3
         self.command_handler(event)
 
     def admin(self, args):
@@ -111,6 +115,12 @@ class Bot(BaseBot):
         validate_sender = sender['id'] in allowed_ids or sender['name'] in allowed_types
 
         return validate_sender
+<<<<<<< HEAD
+=======
+=======
+        self.command(event)
+>>>>>>> 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
+>>>>>>> 86fc1f914dcdd2b59d338526988b3dcc264f91c3
 
     def admin(self, args):
         data = {
@@ -313,6 +323,7 @@ class Bot(BaseBot):
         '''
         self.send_message(msg)
 
+<<<<<<< HEAD
 
 << << << < HEAD
     def command_handler(self, event):
@@ -323,6 +334,17 @@ class Bot(BaseBot):
     def command(self, event):
 >>>>>> > 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
 >>>>>> > 86fc1f914dcdd2b59d338526988b3dcc264f91c3
+=======
+<<<<<<< HEAD
+    def command_handler(self, event):
+=======
+<<<<<<< HEAD
+    def command_handler(self, event):
+=======
+    def command(self, event):
+>>>>>>> 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
+>>>>>>> 86fc1f914dcdd2b59d338526988b3dcc264f91c3
+>>>>>>> e7be767007bdf7d4f703dd3968d0aea3d58005ac
         command_list = {'add': self.add,
                         'upd': self.update,
                         'del': self.delete,
