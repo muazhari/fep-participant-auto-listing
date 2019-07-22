@@ -14,8 +14,8 @@ class cleaner:
         if data['batch'] not in self.store.keys():
             self.store[data['batch']] = []
 
-        selected_user_data = [data[key]
-                              for key in data.keys() if key not in ['batch']]
+        selected_user_data = [data['name'],
+                              data['campus'], data['room']]
 
         self.store[data['batch']].append(selected_user_data)
 
@@ -28,9 +28,7 @@ class cleaner:
             lstrip = self.file[line].strip()
             lsplit = self.file[line].split('-')
 
-            args = []
-            for i in lsplit:
-                args.append(i.strip())
+            args = list(map(str.strip, lsplit))
 
             for i in args[0]:
                 if hasNumbers(i):
@@ -43,6 +41,6 @@ class cleaner:
                     'batch': batch,
                     'name': args[0],
                     'campus': args[1],
-                    'room': '' if len(args) < 3 else args[2],
+                    'room': '' if len(args) < 3 else args[-1],
                 }
                 self.set_store(data)

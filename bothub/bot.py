@@ -9,6 +9,9 @@ from bothub_client.decorators import command
 
 from inspect import getfullargspec
 
+import requests
+from datetime import datetime
+
 from bothub.feplist_cleaner import cleaner
 
 
@@ -89,9 +92,10 @@ class Bot(BaseBot):
             self.set_store(data)
             self.view(data['batch'])
             # self.send_message('Done!')
+            self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'add <batch> <name> <campus> <room>')
+            self.send_message(Bot.command_prefix
+                              + 'add <batch> <name> <campus> <room>')
 
     def update(self, args):
         if len(args) == 6:
@@ -106,9 +110,10 @@ class Bot(BaseBot):
 
             self.update_store(data)
             self.send_message('Done!')
+            self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'upd <batch> <number> <name> <campus> <room>')
+            self.send_message(Bot.command_prefix
+                              + 'upd <batch> <number> <name> <campus> <room>')
 
     def delete(self, args):
         if len(args) == 3:
@@ -119,9 +124,10 @@ class Bot(BaseBot):
             }
             self.delete_store(data)
             self.send_message('Done!')
+            self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'del <batch> <number>')
+            self.send_message(Bot.command_prefix
+                              + 'del <batch> <number>')
 
     def view(self, args):
         if len(args) <= 2:
@@ -157,8 +163,8 @@ class Bot(BaseBot):
                     msg += '\n'
                     self.send_message(msg)
             else:
-                self.send_message(Bot.command_prefix +
-                                  'del <batch> <number>')
+                self.send_message(Bot.command_prefix
+                                  + 'del <batch> <number>')
 
     def set_store(self, data):
         if data['batch'].lower() in Bot.batch_list.keys():
@@ -178,8 +184,7 @@ class Bot(BaseBot):
 
             # selected_user_data = {key: data[key]
             #                       for key in data.keys() if key not in ['batch', 'user_id']}
-            selected_user_data = [data[key]
-                                  for key in data.keys() if key not in ['batch', 'user_id', 'num']]
+            selected_user_data = [data['name'], data['campus'], data['room']]
 
             store[data['batch']].append(selected_user_data)
 
@@ -197,8 +202,8 @@ class Bot(BaseBot):
             # store[data['batch']][data['user_id']] = selected_user_data
 
             try:
-                selected_user_data = [data[key]
-                                      for key in data.keys() if key not in ['batch', 'user_id', 'num']]
+                selected_user_data = [data['name'],
+                                      data['campus'], data['room']]
 
                 store[data['batch']][int(
                     data['num']) - 1] = selected_user_data
@@ -243,8 +248,28 @@ class Bot(BaseBot):
             self.set_project_data({'fep': store})
             self.send_message('Done!')
         else:
-            self.send_message(Bot.command_prefix +
-                              'pre_store <url>')
+            self.send_message(Bot.command_prefix
+                              + 'pre_store <url>')
+
+    def backup_store(self, args=None):
+        headers = {'Content-type': 'application/json'}
+
+        store = self.get_project_data('fep')
+        backup_store = self.get_project_data('backup')
+
+        if backup_store is None:
+            backup_store = {'fep': []}
+        else:
+            backup_store = backup_store['fep'][-20:]
+
+        response = requests.post(
+            'https://paste.c-net.org/', headers=headers, data=store)
+
+        if args is None or args != 'silent':
+            self.send_message('Done!\n{}'.format(response.text))
+
+        backup_store['fep'].append({datetime.now(): response})
+        self.set_project_data({'fep': store, 'backup': backup_store})
 
     def command(self, event):
         command_list = {'add': self.add,
@@ -253,6 +278,7 @@ class Bot(BaseBot):
                         'view': self.view,
                         'reset_store': self.reset_store,
                         'pre_store': self.pre_store,
+                        'backup_store': self.backup_store
                         }
 
         content_splitted = event['content'].split(' ')
