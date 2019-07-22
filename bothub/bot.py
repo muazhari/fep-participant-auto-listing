@@ -80,10 +80,6 @@ class Bot(BaseBot):
             if event['event_type'] != 'message':
                 self.send_message('Join event!')
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 86fc1f914dcdd2b59d338526988b3dcc264f91c3
         self.command_handler(event)
 
     def admin(self, args):
@@ -115,12 +111,6 @@ class Bot(BaseBot):
         validate_sender = sender['id'] in allowed_ids or sender['name'] in allowed_types
 
         return validate_sender
-<<<<<<< HEAD
-=======
-=======
-        self.command(event)
->>>>>>> 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
->>>>>>> 86fc1f914dcdd2b59d338526988b3dcc264f91c3
 
     def admin(self, args):
         data = {
@@ -166,8 +156,8 @@ class Bot(BaseBot):
             self.view([args[0], args[-1]])
             self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'add <batch> <name> <campus> <room>')
+            self.send_message(Bot.command_prefix
+                              + 'add <batch> <name> <campus> <room>')
 
     def update(self, args):
         if len(args) == 6:
@@ -184,8 +174,8 @@ class Bot(BaseBot):
             self.send_message('Done!')
             self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'upd <batch> <number> <name> <campus> <room>')
+            self.send_message(Bot.command_prefix
+                              + 'upd <batch> <number> <name> <campus> <room>')
 
     def delete(self, args):
         if len(args) == 3:
@@ -198,8 +188,8 @@ class Bot(BaseBot):
             self.send_message('Done!')
             self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'del <batch> <number>')
+            self.send_message(Bot.command_prefix
+                              + 'del <batch> <number>')
 
     def view(self, args):
         if len(args) <= 2:
@@ -228,8 +218,8 @@ class Bot(BaseBot):
                     msg += '\n'
                     self.send_message(msg)
         else:
-            self.send_message(Bot.command_prefix +
-                              'view <batch>')
+            self.send_message(Bot.command_prefix
+                              + 'view <batch>')
 
     def set_store(self, data):
         if data['batch'].lower() in Bot.batch_list.keys():
@@ -291,8 +281,8 @@ class Bot(BaseBot):
             self.set_project_data({'fep': store})
             self.send_message('Done!')
         else:
-            self.send_message(Bot.command_prefix +
-                              'pre_store <url>')
+            self.send_message(Bot.command_prefix
+                              + 'pre_store <url>')
 
     def backup_store(self, args=None):
         headers = {'Content-type': 'application/json'}
@@ -323,28 +313,8 @@ class Bot(BaseBot):
         '''
         self.send_message(msg)
 
-<<<<<<< HEAD
 
-<< << << < HEAD
     def command_handler(self, event):
-== == == =
-<< << << < HEAD
-    def command_handler(self, event):
-== == == =
-    def command(self, event):
->>>>>> > 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
->>>>>> > 86fc1f914dcdd2b59d338526988b3dcc264f91c3
-=======
-<<<<<<< HEAD
-    def command_handler(self, event):
-=======
-<<<<<<< HEAD
-    def command_handler(self, event):
-=======
-    def command(self, event):
->>>>>>> 49bf2f438f8fe08e5ed6a9d27c1013da65aff462
->>>>>>> 86fc1f914dcdd2b59d338526988b3dcc264f91c3
->>>>>>> e7be767007bdf7d4f703dd3968d0aea3d58005ac
         command_list = {'add': self.add,
                         'upd': self.update,
                         'del': self.delete,
