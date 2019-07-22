@@ -162,9 +162,9 @@ class Bot(BaseBot):
 
                     msg += '\n'
                     self.send_message(msg)
-            else:
-                self.send_message(Bot.command_prefix
-                                  + 'del <batch> <number>')
+        else:
+            self.send_message(Bot.command_prefix
+                              + 'view <batch>')
 
     def set_store(self, data):
         if data['batch'].lower() in Bot.batch_list.keys():
