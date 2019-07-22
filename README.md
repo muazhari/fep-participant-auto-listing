@@ -31,7 +31,7 @@ backup_store <condition> - .backup_store silent / .backup_store
 ```
 
 # Todos
--
+- Please fork it, and contribute yeah!
 
 # Authors
 - Muhammad Kharisma Azhari - Initial work
