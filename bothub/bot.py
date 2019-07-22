@@ -176,7 +176,7 @@ class Bot(BaseBot):
                 else:
                     selected_batch = [data['batch'].lower()]
 
-                if data['batch'].lower() in store:
+                if all(True for selected_batch in store.keys()):
 
                     header = 'FEP BINUSIAN IT\n(Nama - Kampus - Nomor Ruangan)\n\n'
 
