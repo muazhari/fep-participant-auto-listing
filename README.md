@@ -12,6 +12,7 @@ $ pip install -r requirements.txt
 Before using bothub-cli, you need to tell it about your [BotHub.Studio](https://bothub.studio) credentials.
 ```
 $ bothub configure
+$ bothub channel add line
 ```
 
 # Usage
