@@ -126,8 +126,8 @@ class Bot(BaseBot):
             self.view([args[0], args[-1]])
             self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'add <batch> <name> <campus> <room>')
+            self.send_message(Bot.command_prefix
+                              + 'add <batch> <name> <campus> <room>')
 
     def update(self, args):
         if len(args) == 6:
@@ -144,8 +144,8 @@ class Bot(BaseBot):
             self.send_message('Done!')
             self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'upd <batch> <number> <name> <campus> <room>')
+            self.send_message(Bot.command_prefix
+                              + 'upd <batch> <number> <name> <campus> <room>')
 
     def delete(self, args):
         if len(args) == 3:
@@ -158,8 +158,8 @@ class Bot(BaseBot):
             self.send_message('Done!')
             self.backup_store('silent')
         else:
-            self.send_message(Bot.command_prefix +
-                              'del <batch> <number>')
+            self.send_message(Bot.command_prefix
+                              + 'del <batch> <number>')
 
     def view(self, args):
         if len(args) <= 2:
@@ -176,20 +176,23 @@ class Bot(BaseBot):
                 else:
                     selected_batch = [data['batch'].lower()]
 
-                header = 'FEP BINUSIAN IT\n(Nama - Kampus - Nomor Ruangan)\n\n'
+                if data['batch'].lower() in store:
 
-                for batch in selected_batch:
-                    msg = header + \
-                        '{}. {}\n'.format(batch.upper(), Bot.batch_list[batch])
-                    for i in range(0, len(store[batch])):
-                        msg += '{}. {} - {} - {}\n'.format(
-                            i + 1, store[batch][i][0], store[batch][i][1], store[batch][i][2])
+                    header = 'FEP BINUSIAN IT\n(Nama - Kampus - Nomor Ruangan)\n\n'
 
-                    msg += '\n'
-                    self.send_message(msg)
+                    for batch in selected_batch:
+                        msg = header + \
+                            '{}. {}\n'.format(
+                                batch.upper(), Bot.batch_list[batch])
+                        for i in range(0, len(store[batch])):
+                            msg += '{}. {} - {} - {}\n'.format(
+                                i + 1, store[batch][i][0], store[batch][i][1], store[batch][i][2])
+
+                        msg += '\n'
+                        self.send_message(msg)
         else:
-            self.send_message(Bot.command_prefix +
-                              'view <batch>')
+            self.send_message(Bot.command_prefix
+                              + 'view <batch>')
 
     def set_store(self, data):
         if data['batch'].lower() in Bot.batch_list.keys():
@@ -251,8 +254,8 @@ class Bot(BaseBot):
             self.set_project_data({'fep': store})
             self.send_message('Done!')
         else:
-            self.send_message(Bot.command_prefix +
-                              'pre_store <url>')
+            self.send_message(Bot.command_prefix
+                              + 'pre_store <url>')
 
     def backup_store(self, args=None):
         headers = {'Content-type': 'application/json'}
