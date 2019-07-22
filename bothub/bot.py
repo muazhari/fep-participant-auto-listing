@@ -90,7 +90,11 @@ class Bot(BaseBot):
             }
 
             self.set_store(data)
+<<<<<<< HEAD
             self.view([args[0], args[-1]])
+=======
+            self.view({'batch': args[0], 'user_id': args[-1]})
+>>>>>>> 4bcb5e57275aafee430f4e873449ff8121fd5220
             # self.send_message('Done!')
             self.backup_store('silent')
         else:
